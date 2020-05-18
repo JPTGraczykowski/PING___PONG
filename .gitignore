@@ -1,4 +1,4 @@
-.bpr
-.res
-.dfm
-.~dfm
+*.bpr
+*.res
+*.dfm
+*.~dfm
