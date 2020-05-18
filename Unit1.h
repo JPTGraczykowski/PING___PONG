@@ -8,11 +8,23 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
+#include <Graphics.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
         TShape *Background;
+        TImage *PaddleRight;
+        TImage *PaddleLeft;
+        TTimer *PaddleRightTimerUp;
+        TTimer *PaddleLeftTimerUp;
+        TTimer *PaddleLeftTimerDown;
+        TTimer *PaddleRightTimerDown;
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
+          TShiftState Shift);
+        void __fastcall PaddleLeftTimerUpTimer(TObject *Sender);
+        void __fastcall PaddleLeftTimerDownTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
