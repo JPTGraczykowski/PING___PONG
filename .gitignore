@@ -2,3 +2,6 @@
 *.res
 *.dfm
 *.~dfm
+*.exe
+*.obj
+*.tds
