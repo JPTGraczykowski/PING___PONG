@@ -10,55 +10,6 @@
 
 int x = 10;
 int y = 5;
-int bounces = 0;
-int pointsLeft = 0;
-int pointsRight = 0;
-
-void showGameInfo(TLabel *LabelScore, TLabel *LabelBounces)
-{
-        AnsiString strBounces = IntToStr(bounces);
-        AnsiString strPointsLeft = IntToStr(pointsLeft);
-        AnsiString strPointsRight = IntToStr(pointsRight);
-
-        LabelScore->Caption = "Score: " + strPointsLeft + " : " + strPointsRight;
-        LabelScore->Visible = true;
-
-        LabelBounces->Caption = "Bounces: " + strBounces;
-        LabelBounces->Visible = true;
-}
-
-void prepareWindowToPlay(TShape *Background, TImage *PaddleLeft, TImage *PaddleRight,
-                         TImage *Ball, TLabel *LabelScore, TLabel *LabelWhoWins,
-                         TLabel *LabelBounces, TLabel *LabelStart, TButton *ButtonStart,
-                         TButton *ButtonNewGame, TButton *ButtonNextRound, TTimer *BallTimer)
-{
-        // positions of elements
-        PaddleLeft->Left = 10;
-        PaddleLeft->Top = Background->Height / 2 - PaddleLeft->Height / 2;
-        PaddleLeft->Visible = true;
-
-        PaddleRight->Left = Background->Width - PaddleRight->Width - 10;
-        PaddleRight->Top = Background->Height / 2 - PaddleRight->Height / 2;
-        PaddleRight->Visible = true;
-
-        Ball->Left = 488;
-        Ball->Top = 190;
-        BallTimer->Interval = 32;
-        Ball->Visible = true;
-
-        //  turn off game info
-        LabelScore->Visible = false;
-        LabelBounces->Visible = false;
-        LabelWhoWins->Visible = false;
-
-        ButtonNewGame->Visible = false;
-        ButtonNextRound->Visible = false;
-
-        //turn on start button
-        LabelStart->Visible = true;
-        ButtonStart->Visible = true;
-        ButtonStart->Enabled = true;
-}
 
 TForm1 *Form1;
 //---------------------------------------------------------------------------
@@ -70,47 +21,41 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-        // start values
-        x = 10;
-        y = 5;
-        bounces = 0;
-        pointsLeft = 0;
-        pointsRight = 0;
+        PaddleLeft->Left = 10;
+        PaddleLeft->Top = Background->Height / 2 - PaddleLeft->Height / 2;
+        PaddleLeft->Visible = true;
 
-        // background start color
-        Background->Brush->Color = clNavy;
-
-        //prepare window to play
-        prepareWindowToPlay(Background, PaddleLeft, PaddleRight, Ball, LabelScore,
-                                LabelWhoWins, LabelBounces, LabelStart, ButtonStart,
-                                ButtonNewGame, ButtonNextRound, BallTimer);
-
+        PaddleRight->Left = Background->Width - PaddleRight->Width - 10;
+        PaddleRight->Top = Background->Height / 2 - PaddleRight->Height / 2;
+        PaddleRight->Visible = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PaddleLeftTimerUpTimer(TObject *Sender)
 {
         if(PaddleLeft->Top >= 10)
-                PaddleLeft->Top -= 10;        
+                PaddleLeft->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PaddleLeftTimerDownTimer(TObject *Sender)
 {
         if(PaddleLeft->Top + PaddleLeft->Height <= Background->Height - 10)
-                PaddleLeft->Top += 10;        
+                PaddleLeft->Top += 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PaddleRightTimerUpTimer(TObject *Sender)
 {
         if(PaddleRight->Top >= 10)
-                PaddleRight->Top -= 10;        
+                PaddleRight->Top -= 10;
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::PaddleRightTimerDownTimer(TObject *Sender)
 {
         if(PaddleRight->Top + PaddleRight->Height <= Background->Height - 10)
-                PaddleRight->Top += 10;        
+                PaddleRight->Top += 10;
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
@@ -141,7 +86,7 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-        // moving up left paddle
+       // moving up left paddle
         if(Key == 0x41)  // A
         {
                 PaddleLeftTimerUp->Enabled = false;
@@ -165,6 +110,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         }
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::BallTimerTimer(TObject *Sender)
 {
         Ball->Left += x;
@@ -199,19 +145,11 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         }
                         //change background color
                         Background->Brush->Color = clMaroon;
-                        bounces += 1;
                 }
                 else  // fail
                 {
                         BallTimer->Enabled = false;
                         Ball->Visible = false;
-                        LabelWhoWins->Caption = "Point for right player";
-                        pointsRight += 1;
-                        LabelWhoWins->Visible = true;
-                        showGameInfo(LabelScore, LabelBounces);
-                        ButtonNewGame->Visible = true;
-                        ButtonNextRound->Visible = true;
-
                 }
         }
         //right paddle collision
@@ -235,43 +173,24 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                                 if(BallTimer->Interval > 2) BallTimer->Interval -= 2;
                         }
                         Background->Brush->Color = clHotLight;
-                        bounces += 1;
 
                 }
                 else  // fail
                 {
                         BallTimer->Enabled = false;
                         Ball->Visible = false;
-                        LabelWhoWins->Caption = "Point for left player";
-                        pointsLeft += 1;
-                        LabelWhoWins->Visible = true;
-                        showGameInfo(LabelScore, LabelBounces);
-                        ButtonNewGame->Visible = true;
-                        ButtonNextRound->Visible = true;
                 }
-        }        
+        }
+
+
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::ButtonStartClick(TObject *Sender)
 {
         LabelStart->Visible = false;
         ButtonStart->Visible = false;
         ButtonStart->Enabled = false;
-        BallTimer->Enabled = true;        
+        BallTimer->Enabled = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::ButtonNextRoundClick(TObject *Sender)
-{
-        // start values
-        x = 10;
-        y = 5;
-        bounces = 0;
-
-        //prepare window to play
-        prepareWindowToPlay(Background, PaddleLeft, PaddleRight, Ball, LabelScore,
-                                LabelWhoWins, LabelBounces, LabelStart, ButtonStart,
-                                ButtonNewGame, ButtonNextRound, BallTimer);
-
-}
-//---------------------------------------------------------------------------
-
