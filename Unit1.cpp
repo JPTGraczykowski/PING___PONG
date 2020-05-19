@@ -14,16 +14,20 @@ int bounces = 0;
 int pointsLeft = 0;
 int pointsRight = 0;
 
-void showGameInfo(TLabel *LabelScore, TLabel *LabelBounces)
+void showGameInfo(TLabel *LabelScore, TLabel *LabelBounces, TShape *Background)
 {
         AnsiString strBounces = IntToStr(bounces);
         AnsiString strPointsLeft = IntToStr(pointsLeft);
         AnsiString strPointsRight = IntToStr(pointsRight);
 
         LabelScore->Caption = "Score: " + strPointsLeft + " : " + strPointsRight;
+        LabelScore->Left =  Background->Width / 2 - LabelScore->Width / 2;
+        LabelScore->Top = Background->Height * 2/6;
         LabelScore->Visible = true;
 
         LabelBounces->Caption = "Bounces: " + strBounces;
+        LabelBounces->Left =  Background->Width / 2 - LabelBounces->Width / 2;
+        LabelBounces->Top = Background->Height * 3/6;
         LabelBounces->Visible = true;
 }
 
@@ -44,7 +48,6 @@ void prepareWindowToPlay(TShape *Background, TImage *PaddleLeft, TImage *PaddleR
         Ball->Left = 488;
         Ball->Top = 190;
         BallTimer->Interval = 32;
-        Ball->Visible = true;
 
         //  turn off game info
         LabelScore->Visible = false;
@@ -55,7 +58,11 @@ void prepareWindowToPlay(TShape *Background, TImage *PaddleLeft, TImage *PaddleR
         ButtonNextRound->Visible = false;
 
         //turn on start button
+        LabelStart->Left = Background->Width / 2 - LabelStart->Width / 2;
+        LabelStart->Top = Background->Height / 4;
         LabelStart->Visible = true;
+        ButtonStart->Left = Background->Width / 2 - ButtonStart->Width / 2;
+        ButtonStart->Top = Background->Height * 3 / 4;
         ButtonStart->Visible = true;
         ButtonStart->Enabled = true;
 }
@@ -203,13 +210,23 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 }
                 else  // fail
                 {
+                        pointsRight += 1;
+
                         BallTimer->Enabled = false;
                         Ball->Visible = false;
+
+                        LabelWhoWins->Left = Background->Width / 2 - LabelWhoWins->Width / 2;
+                        LabelWhoWins->Top = Background->Height / 5;
                         LabelWhoWins->Caption = "Point for right player";
-                        pointsRight += 1;
                         LabelWhoWins->Visible = true;
-                        showGameInfo(LabelScore, LabelBounces);
+
+                        showGameInfo(LabelScore, LabelBounces, Background);
+
+                        ButtonNewGame->Left = Background->Width / 2 - ButtonNewGame->Width / 2 ;
+                        ButtonNewGame->Top = Background->Height * 4 / 6;
                         ButtonNewGame->Visible = true;
+                        ButtonNextRound->Left = Background->Width / 2 - ButtonNextRound->Width / 2 ;
+                        ButtonNextRound->Top = Background->Height * 5 / 6;
                         ButtonNextRound->Visible = true;
 
                 }
@@ -240,13 +257,23 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 }
                 else  // fail
                 {
+                        pointsLeft += 1;
+
                         BallTimer->Enabled = false;
                         Ball->Visible = false;
+
+                        LabelWhoWins->Left = Background->Width / 2 - LabelWhoWins->Width / 2 ;
+                        LabelWhoWins->Top = Background->Height / 5;
                         LabelWhoWins->Caption = "Point for left player";
-                        pointsLeft += 1;
                         LabelWhoWins->Visible = true;
-                        showGameInfo(LabelScore, LabelBounces);
+
+                        showGameInfo(LabelScore, LabelBounces, Background);
+
+                        ButtonNewGame->Left = Background->Width / 2 - ButtonNewGame->Width / 2 ;
+                        ButtonNewGame->Top = Background->Height * 4 / 6;
                         ButtonNewGame->Visible = true;
+                        ButtonNextRound->Left = Background->Width / 2 - ButtonNextRound->Width / 2 ;
+                        ButtonNextRound->Top = Background->Height * 5 / 6;
                         ButtonNextRound->Visible = true;
                 }
         }        
@@ -257,7 +284,17 @@ void __fastcall TForm1::ButtonStartClick(TObject *Sender)
         LabelStart->Visible = false;
         ButtonStart->Visible = false;
         ButtonStart->Enabled = false;
-        BallTimer->Enabled = true;        
+        BallTimer->Enabled = true;
+        Ball->Visible = true;
+
+        // positions of elements
+        PaddleLeft->Left = 10;
+        PaddleLeft->Top = Background->Height / 2 - PaddleLeft->Height / 2;
+        PaddleLeft->Visible = true;
+
+        PaddleRight->Left = Background->Width - PaddleRight->Width - 10;
+        PaddleRight->Top = Background->Height / 2 - PaddleRight->Height / 2;
+        PaddleRight->Visible = true;        
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::ButtonNextRoundClick(TObject *Sender)
@@ -274,4 +311,5 @@ void __fastcall TForm1::ButtonNextRoundClick(TObject *Sender)
 
 }
 //---------------------------------------------------------------------------
+
 

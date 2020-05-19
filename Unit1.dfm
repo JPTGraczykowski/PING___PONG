@@ -471,20 +471,6 @@ object Form1: TForm1
       F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     Transparent = True
   end
-  object LabelStart: TLabel
-    Left = 272
-    Top = 88
-    Width = 413
-    Height = 37
-    Caption = 'Let'#39's play PING___PONG !'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clYellow
-    Font.Height = -32
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    Transparent = True
-  end
   object LabelWhoWins: TLabel
     Left = 368
     Top = 40
@@ -503,9 +489,9 @@ object Form1: TForm1
   object LabelScore: TLabel
     Left = 368
     Top = 96
-    Width = 230
+    Width = 172
     Height = 37
-    Caption = 'LabelWhoWins'
+    Caption = 'LabelScore'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clYellow
     Font.Height = -32
@@ -518,9 +504,24 @@ object Form1: TForm1
   object LabelBounces: TLabel
     Left = 368
     Top = 152
-    Width = 230
+    Width = 215
     Height = 37
-    Caption = 'LabelWhoWins'
+    Caption = 'LabelBounces'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clYellow
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+    Visible = False
+  end
+  object LabelStart: TLabel
+    Left = 272
+    Top = 48
+    Width = 403
+    Height = 37
+    Caption = 'Let'#39's play PING___PONG!'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clYellow
     Font.Height = -32

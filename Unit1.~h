@@ -22,13 +22,13 @@ __published:	// IDE-managed Components
         TTimer *PaddleLeftTimerDown;
         TTimer *PaddleRightTimerDown;
         TTimer *BallTimer;
-        TLabel *LabelStart;
         TButton *ButtonStart;
         TButton *ButtonNewGame;
         TButton *ButtonNextRound;
         TLabel *LabelWhoWins;
         TLabel *LabelScore;
         TLabel *LabelBounces;
+        TLabel *LabelStart;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall PaddleLeftTimerUpTimer(TObject *Sender);
         void __fastcall PaddleLeftTimerDownTimer(TObject *Sender);
