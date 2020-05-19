@@ -128,6 +128,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 if((Ball->Top + Ball->Height / 2 > PaddleLeft->Top) &&
                    (Ball->Top + Ball->Height / 2 < PaddleLeft->Top + PaddleLeft->Height))
                 {
+                        // middle paddle
                         if ((x < 0) &&
                         (Ball->Top + Ball->Height / 2 > PaddleLeft->Top + PaddleLeft->Height / 2 - 10) &&
                         (Ball->Top + Ball->Height / 2 < PaddleLeft->Top + PaddleLeft->Height / 2 + 10))
@@ -135,14 +136,17 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                                 y = -y;
                                 x = -x;
                                 if(BallTimer->Interval > 6) BallTimer->Interval -= 6;
+
                         }
-                        else if(x < 0)
+                        else if(x < 0) //not middle paddle
                         {
                                 x = -x;
                                 if(BallTimer->Interval > 2) BallTimer->Interval -= 2;
                         }
+                        //change background color
+                        Background->Brush->Color = clMaroon;
                 }
-                else
+                else  // fail
                 {
                         BallTimer->Enabled = false;
                         Ball->Visible = false;
@@ -154,6 +158,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 if((Ball->Top + Ball->Height / 2 > PaddleRight->Top) &&
                   (Ball->Top + Ball->Height / 2 < PaddleRight->Top + PaddleRight->Height))
                 {
+                        // middle paddle
                         if((x > 0) &&
                              (Ball->Top + Ball->Height / 2 > PaddleRight->Top + PaddleRight->Height / 2 - 10) &&
                             (Ball->Top + Ball->Height / 2 < PaddleRight->Top + PaddleRight->Height / 2 + 10))
@@ -162,17 +167,18 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                                 x = -x;
                                 if(BallTimer->Interval > 6) BallTimer->Interval -= 6;
                             }
-                        else if(x > 0)
+                        else if(x > 0) //not middle paddle
                         {
                                 x = -x;
                                 if(BallTimer->Interval > 2) BallTimer->Interval -= 2;
                         }
+                        Background->Brush->Color = clHotLight;
 
                 }
-                else
+                else  // fail
                 {
                         BallTimer->Enabled = false;
-                        Ball->Visible = false;
+                        Ball->Visible = false
                 }
         }
 

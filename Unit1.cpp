@@ -178,11 +178,20 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 else  // fail
                 {
                         BallTimer->Enabled = false;
-                        Ball->Visible = false
+                        Ball->Visible = false;
                 }
         }
 
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ButtonStartClick(TObject *Sender)
+{
+        LabelStart->Visible = false;
+        ButtonStart->Visible = false;
+        ButtonStart->Enabled = false;
+        BallTimer->Enabled = true;
 }
 //---------------------------------------------------------------------------
 
