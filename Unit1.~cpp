@@ -134,12 +134,12 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         {
                                 y = -y;
                                 x = -x;
-                                BallTimer->Interval -= 6;
+                                if(BallTimer->Interval > 6) BallTimer->Interval -= 6;
                         }
                         else if(x < 0)
                         {
                                 x = -x;
-                                BallTimer->Interval -= 2;
+                                if(BallTimer->Interval > 2) BallTimer->Interval -= 2;
                         }
                 }
                 else
@@ -160,12 +160,12 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                             {
                                 y = -y;
                                 x = -x;
-                                BallTimer->Interval -= 6;
+                                if(BallTimer->Interval > 6) BallTimer->Interval -= 6;
                             }
                         else if(x > 0)
                         {
                                 x = -x;
-                                BallTimer->Interval -= 2;
+                                if(BallTimer->Interval > 2) BallTimer->Interval -= 2;
                         }
 
                 }
