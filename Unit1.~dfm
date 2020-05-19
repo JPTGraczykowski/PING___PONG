@@ -578,6 +578,23 @@ object Form1: TForm1
     Visible = False
     OnClick = ButtonNextRoundClick
   end
+  object ButtonHelp: TButton
+    Left = 384
+    Top = 368
+    Width = 209
+    Height = 57
+    Cursor = crHandPoint
+    Caption = 'HELP'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    Visible = False
+    OnClick = ButtonStartClick
+  end
   object PaddleLeftTimerUp: TTimer
     Enabled = False
     Interval = 15

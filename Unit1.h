@@ -29,6 +29,7 @@ __published:	// IDE-managed Components
         TLabel *LabelScore;
         TLabel *LabelBounces;
         TLabel *LabelStart;
+        TButton *ButtonHelp;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall PaddleLeftTimerUpTimer(TObject *Sender);
         void __fastcall PaddleLeftTimerDownTimer(TObject *Sender);
@@ -41,6 +42,7 @@ __published:	// IDE-managed Components
         void __fastcall BallTimerTimer(TObject *Sender);
         void __fastcall ButtonStartClick(TObject *Sender);
         void __fastcall ButtonNextRoundClick(TObject *Sender);
+        void __fastcall ButtonHelpClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

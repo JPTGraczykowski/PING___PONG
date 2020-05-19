@@ -14,6 +14,7 @@ int bounces = 0;
 int pointsLeft = 0;
 int pointsRight = 0;
 
+
 void showGameInfo(TLabel *LabelScore, TLabel *LabelBounces, TShape *Background)
 {
         AnsiString strBounces = IntToStr(bounces);
@@ -34,7 +35,8 @@ void showGameInfo(TLabel *LabelScore, TLabel *LabelBounces, TShape *Background)
 void prepareWindowToPlay(TShape *Background, TImage *PaddleLeft, TImage *PaddleRight,
                          TImage *Ball, TLabel *LabelScore, TLabel *LabelWhoWins,
                          TLabel *LabelBounces, TLabel *LabelStart, TButton *ButtonStart,
-                         TButton *ButtonNewGame, TButton *ButtonNextRound, TTimer *BallTimer)
+                         TButton *ButtonNewGame, TButton *ButtonNextRound, TTimer *BallTimer,
+                         TButton *ButtonHelp)
 {
         // positions of elements
         PaddleLeft->Left = 10;
@@ -57,14 +59,20 @@ void prepareWindowToPlay(TShape *Background, TImage *PaddleLeft, TImage *PaddleR
         ButtonNewGame->Visible = false;
         ButtonNextRound->Visible = false;
 
-        //turn on start button
+        //turn on start label, button and help button
         LabelStart->Left = Background->Width / 2 - LabelStart->Width / 2;
         LabelStart->Top = Background->Height / 4;
         LabelStart->Visible = true;
+
         ButtonStart->Left = Background->Width / 2 - ButtonStart->Width / 2;
-        ButtonStart->Top = Background->Height * 3 / 4;
+        ButtonStart->Top = Background->Height * 2 / 3;
         ButtonStart->Visible = true;
         ButtonStart->Enabled = true;
+
+        ButtonHelp->Left = Background->Width / 2 - ButtonStart->Width / 2;
+        ButtonHelp->Top = Background->Height * 4 / 5;
+        ButtonHelp->Visible = true;
+        ButtonHelp->Enabled = true;
 }
 
 TForm1 *Form1;
@@ -90,7 +98,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         //prepare window to play
         prepareWindowToPlay(Background, PaddleLeft, PaddleRight, Ball, LabelScore,
                                 LabelWhoWins, LabelBounces, LabelStart, ButtonStart,
-                                ButtonNewGame, ButtonNextRound, BallTimer);
+                                ButtonNewGame, ButtonNextRound, BallTimer, ButtonHelp);
 
 }
 //---------------------------------------------------------------------------
@@ -284,6 +292,8 @@ void __fastcall TForm1::ButtonStartClick(TObject *Sender)
         LabelStart->Visible = false;
         ButtonStart->Visible = false;
         ButtonStart->Enabled = false;
+        ButtonHelp->Visible = false;
+        ButtonHelp->Enabled = false;
         BallTimer->Enabled = true;
         Ball->Visible = true;
 
@@ -294,7 +304,7 @@ void __fastcall TForm1::ButtonStartClick(TObject *Sender)
 
         PaddleRight->Left = Background->Width - PaddleRight->Width - 10;
         PaddleRight->Top = Background->Height / 2 - PaddleRight->Height / 2;
-        PaddleRight->Visible = true;        
+        PaddleRight->Visible = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::ButtonNextRoundClick(TObject *Sender)
@@ -307,9 +317,17 @@ void __fastcall TForm1::ButtonNextRoundClick(TObject *Sender)
         //prepare window to play
         prepareWindowToPlay(Background, PaddleLeft, PaddleRight, Ball, LabelScore,
                                 LabelWhoWins, LabelBounces, LabelStart, ButtonStart,
-                                ButtonNewGame, ButtonNextRound, BallTimer);
+                                ButtonNewGame, ButtonNextRound, BallTimer, ButtonHelp);
 
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TForm1::ButtonHelpClick(TObject *Sender)
+{
+        Application->MessageBoxA(
+        "Welcome to PING___PONG video game.\nLeft player moves by pressing A and Z.\nRight player moves by pressing UP and DOWN\n\nWhen you bounce the ball with the middle of your paddle, the angle will change and the ball will speed up.\nThe longer you bounce the ball the faster it moves.\nYou can resize the game window.\n\n\nENJOY!",
+        "HELP", MB_OK);
+}
+//---------------------------------------------------------------------------
 

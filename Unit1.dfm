@@ -470,6 +470,7 @@ object Form1: TForm1
       FFFFFFFFFFF5F5F59C9C9C4B4B4B1717170000000000001717174B4B4B9D9D9D
       F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     Transparent = True
+    Visible = False
   end
   object LabelWhoWins: TLabel
     Left = 368
@@ -536,6 +537,7 @@ object Form1: TForm1
     Top = 288
     Width = 209
     Height = 57
+    Cursor = crHandPoint
     Caption = 'START'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -551,6 +553,7 @@ object Form1: TForm1
     Top = 400
     Width = 209
     Height = 57
+    Cursor = crHandPoint
     Caption = 'New Game'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -567,6 +570,7 @@ object Form1: TForm1
     Top = 336
     Width = 209
     Height = 57
+    Cursor = crHandPoint
     Caption = 'Next Round'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -577,6 +581,23 @@ object Form1: TForm1
     TabOrder = 2
     Visible = False
     OnClick = ButtonNextRoundClick
+  end
+  object ButtonHelp: TButton
+    Left = 384
+    Top = 400
+    Width = 209
+    Height = 57
+    Cursor = crHandPoint
+    Caption = 'Help'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    Visible = False
+    OnClick = ButtonHelpClick
   end
   object PaddleLeftTimerUp: TTimer
     Enabled = False
